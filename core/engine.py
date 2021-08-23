@@ -1,6 +1,6 @@
 import time
 
-from scene import GameObject, Scene
+from core.scene import GameObject, Scene
 
 PAUSE = 'PAUSE'
 PLAY = 'PLAY'

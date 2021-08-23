@@ -1,5 +1,5 @@
-from scene import Scene, Dimension, GameObject, Position
-from engine import Engine
+from core.scene import Scene, Dimension, GameObject, Position
+from core.engine import Engine
 
 class CLIScene(Scene):
     def draw(self):

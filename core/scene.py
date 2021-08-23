@@ -1,4 +1,4 @@
-from common import generate_id
+from core.common import generate_id
 
 class Dimension:
     def __init__(self, height: int, width: int) -> None:
@@ -26,15 +26,12 @@ class GameObject:
     def collide(self, game_object):
         pass
 
+    def destroy(self):
+        self._scene.remove(self._id)
+
     def get_id(self):
         return self._id
 
-    def _update(self):
-        pass
-    
-    def _destroy(self):
-        self._scene.remove(self._id)
-    
 class Scene:
     def __init__(self, dimension: Dimension):
         self.dimension = dimension
