@@ -1,13 +1,4 @@
-from core.scene import Scene, Dimension, GameObject, Position
-from core.engine import Engine
+from cli.game import CLIGame
 
-class CLIScene(Scene):
-    def draw(self):
-        print(self.objects)
-
-cli = CLIScene(Dimension(400, 500))
-engine = Engine(cli)
-character = GameObject(cli, Position(10, 10), Dimension(30, 10))
-cli.draw()
-# engine.start()
-engine.stop()
+g = CLIGame()
+g.start()

@@ -12,7 +12,7 @@ class Engine:
         self.scene = scene
         self.fps = fps
     
-    def start(self):
+    def _start(self):
         self.status = PLAY
         while self.status == PLAY:
             self.update()
