@@ -1,4 +1,5 @@
 import time
+import logging
 
 from core.scene import GameObject, Scene
 
@@ -8,6 +9,7 @@ STOP = 'STOP'
 
 class Engine:
     def __init__(self, scene: Scene, fps= 60) -> None:
+        self.logger = logging.Logger(self.__class__.__name__, level=logging.WARN)
         self.status = PAUSE
         self.scene = scene
         self.fps = fps
@@ -22,6 +24,7 @@ class Engine:
         self.status = STOP
 
     def update(self):
+        self.logger.info('update function called.')
         self._update_per_frame()
         self._detect_collision()
         self._draw_frame()
@@ -30,6 +33,7 @@ class Engine:
         game_objects = self.scene.objects
         for game_object in game_objects.values():
             game_object.update()
+        self.logger.info('frame updated.')
     
     def _detect_collision(self):
         def is_intersected(o1: GameObject, o2: GameObject) -> bool:
@@ -49,6 +53,7 @@ class Engine:
             for j in range(i+1, len(game_objects)):
                 o2 = game_objects[j]
                 if is_intersected(o1, o2):
+                    self.logger.info('collision detected between, o1= %s, o2= %s' % (o1.__name__, o2.__name__))
                     o1.collide(o2)
                     o2.collide(o1)
 

@@ -11,14 +11,12 @@ class Position:
         self.y = y
 
 class GameObject:
-    def __init__(self, scene, position: Position, dimension: Dimension, obstacle= False) -> None:
+    def __init__(self, position: Position, dimension: Dimension, obstacle= False, controllable=False) -> None:
         self._id = generate_id()
-        self._scene = scene
+        self.controllable = controllable
         self.obstacle = obstacle
         self.position = position
         self.dimension = dimension
-
-        self._scene.add(self)
     
     def update(self):
         pass
@@ -28,6 +26,15 @@ class GameObject:
 
     def destroy(self):
         self._scene.remove(self._id)
+
+    def on_key_pressed(self, key: chr):
+        pass
+
+    def attach(self, scene):
+        scene.add(self)
+    
+    def subscribe(self, channel):
+        channel.subscribe(self)
 
     def get_id(self):
         return self._id

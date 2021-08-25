@@ -1,4 +1,4 @@
-from core.scene import Dimension
+from core.scene import Dimension, GameObject, Position
 from core.game import Game
 
 from cli.scene import CLIScene
@@ -12,11 +12,12 @@ class CLIGame(Game):
         self.engine = CLIEngine(self.scene)
         self.channel = CLIInputChannel(self._create_channel_callbacks())
         
-        super().__init__(self.scene, self.engine)
+        super().__init__(self.scene, self.engine, self.channel)
 
     def start(self):
         self.engine.start()
-        self.channel.open()
+        self.channel.start()
+        self._prepare()
     
     def pause(self):
         return super().pause()
@@ -29,6 +30,11 @@ class CLIGame(Game):
 
     def exit(self):
         self.engine.stop()
+    
+    def _prepare(self):
+        # Create new character class
+        character = self.factory.create_game_object(Position(10, 50), Dimension(100, 200), controllable=True, channel=True, scene=True)
+        print(character.get_id())
     
     def _create_channel_callbacks(self):
         return {
