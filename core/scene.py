@@ -28,7 +28,7 @@ class GameObject:
         self._scene.remove(self._id)
 
     def on_key_pressed(self, key: chr):
-        pass
+        raise NotImplementedError()
 
     def attach(self, scene):
         scene.add(self)

@@ -8,7 +8,7 @@ from cli.engine import CLIEngine
 
 class CLIGame(Game):
     def __init__(self) -> None:
-        self.scene = CLIScene(Dimension(500, 400))
+        self.scene = CLIScene(Dimension(100, 50))
         self.engine = CLIEngine(self.scene)
         self.channel = CLIInputChannel(self._create_channel_callbacks())
         
