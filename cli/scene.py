@@ -1,5 +1,5 @@
 from cli.util.windows import clear_cli, fast_print
-from core.scene import Dimension, Scene
+from core.scene import Dimension, GameObject, Scene
 
 
 class CLIScene(Scene):
@@ -19,16 +19,32 @@ class CLIScene(Scene):
             for j in range(self.columns):
                 self.map[i][j] = ' '
 
-    def _put_objects(self):
-        for key, obj in self.objects.items():
-            for i in range(len(obj.drawing)):
-                for j in range(len(obj.drawing[0])):
-                    self.map[i+obj.position.x][j +
-                                               obj.position.y] = obj.drawing[i][j]
+    def _draw_objects(self):
+        items_to_delete = []
+        for k, v in self.objects.items():
+            x, y = v.position.x, v.position.y
+            # w, h = v.dimension.width, v.dimension.height
+            if not v.controllable and (x >= self.rows or y >= self.columns or x < 0 or y < 0):
+                items_to_delete.append(k)
+                continue
+            self._draw_object(v)
+
+        for to_delete in items_to_delete:
+            del self.objects[to_delete]
+
+    def _draw_object(self, obj: GameObject):
+        drawing = obj.drawing
+        for i in range(len(drawing)):
+            for j in range(len(drawing[i])):
+                is_greater = i+obj.position.x >= self.rows or j+obj.position.y >= self.columns
+                is_lower = obj.position.x < 0 or obj.position.y < 0
+                if is_greater or is_lower:
+                    continue
+                self.map[i+obj.position.x][j+obj.position.y] = drawing[i][j]
 
     def _draw(self):
         self._clean()
-        self._put_objects()
+        self._draw_objects()
         row = []
         for i in range(self.rows):
             column = []
