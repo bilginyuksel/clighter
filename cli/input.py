@@ -9,9 +9,6 @@ class CLIInputChannel(Thread, InputChannel):
                         name='cli_input_channel', args=self, kwargs=None, daemon=None)
         InputChannel.__init__(self, special_input_callbacks)
 
-    def start(self) -> None:
-        return super().start()
-
     def run(self) -> None:
         self.open()
 

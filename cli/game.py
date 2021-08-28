@@ -18,22 +18,10 @@ class CLIGame(Game):
         self.engine.start()
         self.channel.start()
 
-    def pause(self):
-        return super().pause()
-
-    def resume(self):
-        return super().resume()
-
-    def save(self):
-        return super().save()
-
     def exit(self):
         self.engine.stop()
 
     def _create_channel_callbacks(self):
         return {
-            'q': self.exit,
-            # 's': self.save,
-            'r': self.resume,
-            'p': self.pause
+            'q': self.exit
         }

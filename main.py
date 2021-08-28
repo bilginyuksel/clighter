@@ -1,11 +1,11 @@
-from core.scene import GameObject, Position, Dimension
+from core.scene import GameObject, Position
 from core.factory import GameObjectFactory
 from cli.game import CLIGame
 
 
 class Character(GameObject):
-    def __init__(self, position: Position, dimension: Dimension) -> None:
-        super().__init__(position, dimension, filepath='assets/character.txt',
+    def __init__(self, position: Position) -> None:
+        super().__init__(position, None, filepath='assets/character.txt',
                          obstacle=False, controllable=True)
         self.factory: GameObjectFactory = None
 
@@ -19,13 +19,12 @@ class Character(GameObject):
         elif key == 'a':
             self.position.y -= 3
         elif key == 'm':
-            bullet = Bullet(Position(self.position.x+2, self.position.y+5),
-                            Dimension(100, 200))
+            bullet = Bullet(Position(self.position.x+2, self.position.y+5))
             self.factory.extend_game_object(bullet, scene=True)
 
 
 class Bullet(GameObject):
-    def __init__(self, position: Position, dimension=None) -> None:
+    def __init__(self, position: Position) -> None:
         super().__init__(position, dimension=None, filepath='assets/bullet.txt',
                          obstacle=False, controllable=False)
         self.velocity = 0
@@ -37,8 +36,21 @@ class Bullet(GameObject):
             self.velocity = 0
 
 
+class Monster(GameObject):
+    def __init__(self, position: Position) -> None:
+        super().__init__(position, dimension=None, filepath='assets/monster.txt',
+                         obstacle=False, controllable=False)
+
+    def collide(self, game_object):
+        if isinstance(game_object, Bullet):
+            self.destroy()
+            game_object.destroy()
+
+
 g = CLIGame()
-character = Character(Position(10, 10), Dimension(100, 200))
-g.factory.extend_game_object(character, channel=True, scene=True)
+character = Character(Position(10, 10))
+monster = Monster(Position(30, 50))
 character.factory = g.factory
+g.factory.extend_game_object(character, channel=True, scene=True)
+g.factory.extend_game_object(monster, scene=True)
 g.start()

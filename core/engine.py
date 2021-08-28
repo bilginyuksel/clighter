@@ -52,18 +52,16 @@ class Engine(Thread):
             o2_left, o2_right = o2.position.x, o2.position.x + o2.dimension.width
             o2_top, o2_down = o2.position.y, o2.position.y + o2.dimension.height
 
-            is_x_axis_intersected = o1_right <= o2_left or o2_right <= o1_left
-            is_y_axis_intersected = o1_top <= o2_down or o2_top <= o1_down
-            return not (is_x_axis_intersected or is_y_axis_intersected)
+            is_not_x_axis_intersected = o1_right <= o2_left or o2_right <= o1_left
+            is_not_y_axis_intersected = o1_top <= o2_down or o2_top <= o1_down
+            return not (is_not_x_axis_intersected and is_not_y_axis_intersected)
 
-        game_objects = list(self.scene.objects.values())
-        for i in range(len(game_objects)):
-            o1 = game_objects[i]
-            for j in range(i+1, len(game_objects)):
-                o2 = game_objects[j]
+        objects = list(self.scene.objects.values())
+        for i in range(len(objects)):
+            o1 = objects[i]
+            for j in range(i+1, len(objects)):
+                o2 = objects[j]
                 if is_intersected(o1, o2):
-                    self.logger.info('collision detected between, o1= %s, o2= %s' % (
-                        o1.__name__, o2.__name__))
                     o1.collide(o2)
                     o2.collide(o1)
 

@@ -41,12 +41,13 @@ class GameObject:
         pass
 
     def destroy(self):
-        self._scene.remove(self._id)
+        self._scene.remove(self)
 
     def on_key_pressed(self, key: chr):
         raise NotImplementedError()
 
     def attach(self, scene):
+        self._scene = scene
         scene.add(self)
 
     def subscribe(self, channel):
