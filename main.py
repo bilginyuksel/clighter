@@ -1,4 +1,5 @@
-from core.scene import GameObject, Position
+from core.object import GameObject
+from core.position import Position
 from core.factory import GameObjectFactory
 from cli.game import CLIGame
 

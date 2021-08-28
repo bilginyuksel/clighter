@@ -1,4 +1,4 @@
-from core.scene import Dimension
+from core.dimension import Dimension
 from core.game import Game
 from core.engine import Engine
 

@@ -1,5 +1,7 @@
 from cli.util.windows import clear_cli, fast_print
-from core.scene import Dimension, GameObject, Scene
+from core.dimension import Dimension
+from core.object import GameObject
+from core.scene import Scene
 
 
 class CLIScene(Scene):

@@ -1,7 +1,8 @@
 import time
 import logging
 
-from core.scene import GameObject, Scene
+from core.scene import Scene
+from core.object import GameObject
 from threading import Thread
 
 PAUSE = 'PAUSE'

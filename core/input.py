@@ -1,5 +1,6 @@
 from core.util.singleton import Singleton
-from core.scene import GameObject
+from core.object import GameObject
+
 
 class InputChannel(metaclass=Singleton):
     def __init__(self, special_input_callbacks) -> None:
@@ -18,5 +19,5 @@ class InputChannel(metaclass=Singleton):
 
     def get_input(self):
         current_input = self.__input
-        self.__input = None 
+        self.__input = None
         return current_input

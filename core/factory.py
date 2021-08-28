@@ -1,5 +1,7 @@
 from core.util.singleton import Singleton
-from core.scene import Dimension, Position, GameObject
+from core.position import Position
+from core.dimension import Dimension
+from core.object import GameObject
 
 
 class GameObjectFactory(metaclass=Singleton):
