@@ -7,7 +7,6 @@ class Character(GameObject):
     def __init__(self, position: Position) -> None:
         super().__init__(position, None, filepath='assets/character.txt',
                          obstacle=False, controllable=True)
-        self.factory: GameObjectFactory = None
 
     def on_key_pressed(self, key: chr):
         if key == 's':
@@ -20,7 +19,7 @@ class Character(GameObject):
             self.position.y -= 3
         elif key == 'm':
             bullet = Bullet(Position(self.position.x+2, self.position.y+5))
-            self.factory.extend_game_object(bullet, scene=True)
+            GameObjectFactory().use(bullet, scene=True)
 
 
 class Bullet(GameObject):
@@ -48,9 +47,9 @@ class Monster(GameObject):
 
 
 g = CLIGame()
+factory = GameObjectFactory()
 character = Character(Position(10, 10))
 monster = Monster(Position(30, 50))
-character.factory = g.factory
-g.factory.extend_game_object(character, channel=True, scene=True)
-g.factory.extend_game_object(monster, scene=True)
+factory.use(character, channel=True, scene=True)
+factory.use(monster, scene=True)
 g.start()
