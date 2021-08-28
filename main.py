@@ -46,10 +46,15 @@ class Monster(GameObject):
             game_object.destroy()
 
 
-g = CLIGame()
-factory = GameObjectFactory()
-character = Character(Position(10, 10))
-monster = Monster(Position(30, 50))
-factory.use(character, channel=True, scene=True)
-factory.use(monster, scene=True)
-g.start()
+def main():
+    g = CLIGame()
+    factory = GameObjectFactory()
+    character = Character(Position(10, 10))
+    monster = Monster(Position(30, 50))
+    factory.use(character, channel=True, scene=True)
+    factory.use(monster, scene=True)
+    g.start()
+
+
+if __name__ == '__main__':
+    main()
