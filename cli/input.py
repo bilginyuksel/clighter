@@ -5,9 +5,10 @@ import msvcrt
 
 class CLIInputChannel(Thread, InputChannel):
     def __init__(self, special_input_callbacks) -> None:
-        Thread.__init__(self, group=None, target=self.start, name='cli_input_channel', args=self, kwargs=None, daemon=None)
+        Thread.__init__(self, group=None, target=self.start,
+                        name='cli_input_channel', args=self, kwargs=None, daemon=None)
         InputChannel.__init__(self, special_input_callbacks)
-    
+
     def start(self) -> None:
         return super().start()
 
@@ -17,7 +18,6 @@ class CLIInputChannel(Thread, InputChannel):
     def open(self):
         while self._input != 'q':
             self._input = msvcrt.getch().decode('ascii')
-            print(self._input)
             if self._input in self._callbacks:
                 self._callbacks[self._input]()
             else:

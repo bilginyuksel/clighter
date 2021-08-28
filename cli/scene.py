@@ -1,3 +1,4 @@
+from cli.util.windows import clear_cli, fast_print
 from core.scene import Dimension, Scene
 
 
@@ -10,25 +11,28 @@ class CLIScene(Scene):
                     for _ in range(self.rows)]
 
     def draw(self):
-        # self._clean()
-        # self._put_objects()
-        # move to top-left corner of the CLI
-        print("\033[0;0H")
-        print(self._draw())
-    
+        clear_cli()
+        fast_print(self._draw())
+
     def _clean(self):
         for i in range(self.rows):
             for j in range(self.columns):
                 self.map[i][j] = ' '
-    
+
     def _put_objects(self):
-        pass
+        for key, obj in self.objects.items():
+            for i in range(len(obj.drawing)):
+                for j in range(len(obj.drawing[0])):
+                    self.map[i+obj.position.x][j +
+                                               obj.position.y] = obj.drawing[i][j]
 
     def _draw(self):
+        self._clean()
+        self._put_objects()
         row = []
         for i in range(self.rows):
             column = []
             for j in range(self.columns):
                 column.append(self.map[i][j])
             row.append(''.join(column))
-        return ''.join(row)
+        return '\n'.join(row)
