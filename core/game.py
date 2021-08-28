@@ -19,14 +19,5 @@ class Game:
     def start(self):
         raise NotImplementedError()
 
-    def pause(self):
-        raise NotImplementedError()
-
-    def resume(self):
-        raise NotImplementedError()
-
-    def save(self):
-        raise NotImplementedError()
-
     def exit(self):
         raise NotImplementedError()

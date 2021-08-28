@@ -11,13 +11,13 @@ class Character(GameObject):
 
     def on_key_pressed(self, key: chr):
         if key == 's':
-            self.position.x += 3
-        elif key == 'w':
-            self.position.x -= 3
-        elif key == 'd':
             self.position.y += 3
-        elif key == 'a':
+        elif key == 'w':
             self.position.y -= 3
+        elif key == 'd':
+            self.position.x += 3
+        elif key == 'a':
+            self.position.x -= 3
         elif key == 'm':
             bullet = Bullet(Position(self.position.x+2, self.position.y+5))
             GameObjectFactory().use(bullet, scene=True)
@@ -32,7 +32,7 @@ class Bullet(GameObject):
     def update(self):
         self.velocity += 0.5
         if self.velocity >= 1:
-            self.position.y += 1
+            self.position.x += 1
             self.velocity = 0
 
 
@@ -51,7 +51,7 @@ def main():
     g = CLIGame()
     factory = GameObjectFactory()
     character = Character(Position(10, 10))
-    monster = Monster(Position(30, 50))
+    monster = Monster(Position(80, 30))
     factory.use(character, channel=True, scene=True)
     factory.use(monster, scene=True)
     g.start()

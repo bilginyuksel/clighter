@@ -8,7 +8,7 @@ class CLIScene(Scene):
     def __init__(self, dimension: Dimension):
         super().__init__(dimension)
 
-        self.rows, self.columns = dimension.width, dimension.height
+        self.rows, self.columns = dimension.height, dimension.width
         self.map = [[' ' for _ in range(self.columns)]
                     for _ in range(self.rows)]
 
@@ -25,8 +25,8 @@ class CLIScene(Scene):
         items_to_delete = []
         for k, v in self.objects.items():
             x, y = v.position.x, v.position.y
-            # w, h = v.dimension.width, v.dimension.height
-            if not v.controllable and (x >= self.rows or y >= self.columns or x < 0 or y < 0):
+            w, h = v.dimension.width, v.dimension.height
+            if not v.controllable and (x >= self.columns or y >= self.rows or x+w < 0 or y+h < 0):
                 items_to_delete.append(k)
                 continue
             self._draw_object(v)
@@ -38,11 +38,11 @@ class CLIScene(Scene):
         drawing = obj.drawing
         for i in range(len(drawing)):
             for j in range(len(drawing[i])):
-                is_greater = i+obj.position.x >= self.rows or j+obj.position.y >= self.columns
-                is_lower = obj.position.x < 0 or obj.position.y < 0
+                is_greater = j+obj.position.x >= self.columns or i+obj.position.y >= self.rows
+                is_lower = obj.position.x+j < 0 or obj.position.y+i < 0
                 if is_greater or is_lower:
                     continue
-                self.map[i+obj.position.x][j+obj.position.y] = drawing[i][j]
+                self.map[i+obj.position.y][j+obj.position.x] = drawing[i][j]
 
     def _draw(self):
         self._clean()
