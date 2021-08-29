@@ -1,6 +1,7 @@
 from core.common import generate_id
 from core.dimension import Dimension
 from core.position import Position
+from core.rect import Rectangle
 
 
 class GameObject:
@@ -15,11 +16,11 @@ class GameObject:
         if filepath is not None:
             with open(filepath, 'r') as f:
                 lines = f.read().split('\n')
-                max_row, max_col = len(lines), max(
+                axis_y, axis_x = len(lines), max(
                     [len(line) for line in lines])
-                self.dimension = Dimension(max_row, max_col)
+                self.dimension = Dimension(axis_y, axis_x)
                 self.drawing = [
-                    [' ' for _ in range(max_col)] for _ in range(max_row)]
+                    [' ' for _ in range(axis_x)] for _ in range(axis_y)]
                 for i in range(len(lines)):
                     for j in range(len(lines[i])):
                         self.drawing[i][j] = lines[i][j]
@@ -42,6 +43,9 @@ class GameObject:
 
     def subscribe(self, channel):
         channel.subscribe(self)
+
+    def rect(self) -> Rectangle:
+        return Rectangle(self.position, self.dimension)
 
     def get_id(self):
         return self._id

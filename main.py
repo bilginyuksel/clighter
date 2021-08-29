@@ -19,7 +19,7 @@ class Character(GameObject):
         elif key == 'a':
             self.position.x -= 3
         elif key == 'm':
-            bullet = Bullet(Position(self.position.x+2, self.position.y+5))
+            bullet = Bullet(Position(self.position.x+13, self.position.y+3))
             GameObjectFactory().use(bullet, scene=True)
 
 
@@ -27,13 +27,9 @@ class Bullet(GameObject):
     def __init__(self, position: Position) -> None:
         super().__init__(position, dimension=None, filepath='assets/bullet.txt',
                          obstacle=False, controllable=False)
-        self.velocity = 0
 
     def update(self):
-        self.velocity += 0.5
-        if self.velocity >= 1:
-            self.position.x += 1
-            self.velocity = 0
+        self.position.x += 1
 
 
 class Monster(GameObject):

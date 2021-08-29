@@ -2,7 +2,6 @@ import time
 import logging
 
 from core.scene import Scene
-from core.object import GameObject
 from threading import Thread
 
 PAUSE = 'PAUSE'
@@ -46,23 +45,12 @@ class Engine(Thread):
         self.logger.info('frame updated.')
 
     def _detect_collision(self):
-        def is_intersected(o1: GameObject, o2: GameObject) -> bool:
-            o1_left, o1_right = o1.position.x, o1.position.x + o1.dimension.width
-            o1_top, o1_down = o1.position.y, o1.position.y + o1.dimension.height
-
-            o2_left, o2_right = o2.position.x, o2.position.x + o2.dimension.width
-            o2_top, o2_down = o2.position.y, o2.position.y + o2.dimension.height
-
-            is_not_x_axis_intersected = o1_right <= o2_left or o2_right <= o1_left
-            is_not_y_axis_intersected = o1_top <= o2_down or o2_top <= o1_down
-            return not (is_not_x_axis_intersected and is_not_y_axis_intersected)
-
         objects = list(self.scene.objects.values())
         for i in range(len(objects)):
             o1 = objects[i]
             for j in range(i+1, len(objects)):
                 o2 = objects[j]
-                if is_intersected(o1, o2):
+                if o1.rect().intersect(o2.rect()):
                     o1.collide(o2)
                     o2.collide(o1)
 
