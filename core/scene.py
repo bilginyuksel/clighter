@@ -11,7 +11,8 @@ class Scene:
         self.objects[obj.get_id()] = obj
 
     def remove(self, obj: GameObject) -> None:
-        self.objects.pop(obj.get_id())
+        if obj.get_id() in self.objects:
+            del self.objects[obj.get_id()]
 
     def draw(self):
         raise NotImplementedError()

@@ -3,6 +3,9 @@ from core.position import Position
 from core.factory import GameObjectFactory
 from cli.game import CLIGame
 
+import time
+import random
+
 
 class Character(GameObject):
     def __init__(self, position: Position) -> None:
@@ -47,10 +50,15 @@ def main():
     g = CLIGame()
     factory = GameObjectFactory()
     character = Character(Position(10, 10))
-    monster = Monster(Position(80, 30))
     factory.use(character, channel=True, scene=True)
-    factory.use(monster, scene=True)
     g.start()
+    count = 10
+    while count > 0:
+        rand_x, rand_y = random.randint(50, 150), random.randint(5, 40)
+        monster = Monster(Position(rand_x, rand_y))
+        factory.use(monster, scene=True)
+        count -= 1
+        time.sleep(1)
 
 
 if __name__ == '__main__':
