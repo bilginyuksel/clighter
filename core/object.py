@@ -1,3 +1,4 @@
+from core.util.files import read_from_file
 from core.animation import AnimationMixin
 from core.common import generate_id
 from core.dimension import Dimension
@@ -15,16 +16,7 @@ class GameObject:
         self.drawing = None
 
         if filepath is not None:
-            with open(filepath, 'r') as f:
-                lines = f.read().split('\n')
-                axis_y, axis_x = len(lines), max(
-                    [len(line) for line in lines])
-                self.dimension = Dimension(axis_y, axis_x)
-                self.drawing = [
-                    [' ' for _ in range(axis_x)] for _ in range(axis_y)]
-                for i in range(len(lines)):
-                    for j in range(len(lines[i])):
-                        self.drawing[i][j] = lines[i][j]
+            self.drawing, self.dimension = read_from_file(filepath)
 
         self._delay_frames_to_destroy = None
 

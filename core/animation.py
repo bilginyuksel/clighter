@@ -1,23 +1,12 @@
 from collections import defaultdict
-from core.dimension import Dimension
+from core.util.files import read_from_file
 from core.util.collections import CircularLinkedList
 
 
 class AnimationFrame:
     def __init__(self, filepath, active_frame=30) -> None:
-        self.frame = filepath
         self.active_frame = active_frame
-
-        with open(filepath, 'r') as f:
-            lines = f.read().split('\n')
-            axis_y, axis_x = len(lines), max(
-                [len(line) for line in lines])
-            self.dimension = Dimension(axis_y, axis_x)
-            self.frame = [
-                [' ' for _ in range(axis_x)] for _ in range(axis_y)]
-            for i in range(len(lines)):
-                for j in range(len(lines[i])):
-                    self.frame[i][j] = lines[i][j]
+        self.frame, self.dimension = read_from_file(filepath)
 
 
 class AnimationMixin:
