@@ -7,12 +7,13 @@ from core.rect import Rectangle
 
 
 class GameObject:
-    def __init__(self, position: Position, dimension: Dimension, filepath=None, obstacle=False, controllable=False) -> None:
+    def __init__(self, position: Position, dimension: Dimension, filepath=None, obstacle=False, controllable=False, z_index=0) -> None:
         self._id = generate_id()
         self.controllable = controllable
         self.obstacle = obstacle
         self.position = position
         self.dimension = dimension
+        self.z_index = z_index
         self.drawing = None
 
         if filepath is not None:
@@ -36,9 +37,10 @@ class GameObject:
     def collide(self, game_object):
         pass
 
-    def destroy(self, delay_frames: int = None):
+    def destroy(self, delay_frames: int = None, z_index= float('-inf')):
         if delay_frames is not None:
             self._delay_frames_to_destroy = delay_frames
+            self.z_index = z_index
         else:
             self._scene.remove(self)
 

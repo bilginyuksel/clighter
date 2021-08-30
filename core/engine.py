@@ -1,3 +1,4 @@
+from core.object import GameObject
 from core.animation import AnimationMixin
 import time
 
@@ -31,22 +32,22 @@ class Engine(Thread):
         self.status = STOP
 
     def update(self):
-        self._update_per_frame()
-        self._detect_collision()
+        objects = list(self.scene.objects.values())
+        objects.sort(key=lambda x: x.z_index)
+        self._update_per_frame(objects)
+        self._detect_collision(objects)
         self._draw_frame()
 
-    def _update_per_frame(self):
-        objects = list(self.scene.objects.values())
+    def _update_per_frame(self, objects):
         for game_object in objects:
             game_object._update()
 
-    def _detect_collision(self):
-        objects = list(self.scene.objects.values())
+    def _detect_collision(self, objects):
         for i in range(len(objects)):
             o1 = objects[i]
             for j in range(i+1, len(objects)):
                 o2 = objects[j]
-                if o1.rect().intersect(o2.rect()):
+                if o1.z_index == o2.z_index and o1.rect().intersect(o2.rect()):
                     o1.collide(o2)
                     o2.collide(o1)
 
