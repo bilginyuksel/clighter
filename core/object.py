@@ -1,3 +1,4 @@
+from core.animation import AnimationMixin
 from core.common import generate_id
 from core.dimension import Dimension
 from core.position import Position
@@ -24,6 +25,12 @@ class GameObject:
                 for i in range(len(lines)):
                     for j in range(len(lines[i])):
                         self.drawing[i][j] = lines[i][j]
+
+    def _update(self):
+        # Internal update method, to handle general game object concerns
+        self.update()
+        if isinstance(self, AnimationMixin):
+            self.anim_update()
 
     def update(self):
         pass

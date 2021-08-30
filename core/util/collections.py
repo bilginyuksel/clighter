@@ -29,6 +29,7 @@ class CircularLinkedList:
 
         if self.curr_node is None:
             self.curr_node = self.head
+            return self.curr_node
 
         self.curr_node = self.curr_node.next
         return self.curr_node

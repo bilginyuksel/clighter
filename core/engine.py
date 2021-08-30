@@ -1,5 +1,5 @@
+from core.animation import AnimationMixin
 import time
-import logging
 
 from core.scene import Scene
 from threading import Thread
@@ -11,8 +11,6 @@ STOP = 'STOP'
 
 class Engine(Thread):
     def __init__(self, scene: Scene, fps=60) -> None:
-        self.logger = logging.Logger(
-            self.__class__.__name__, level=logging.WARN)
         self.status = PAUSE
         self.scene = scene
         self.fps = fps
@@ -33,16 +31,14 @@ class Engine(Thread):
         self.status = STOP
 
     def update(self):
-        self.logger.info('update function called.')
         self._update_per_frame()
         self._detect_collision()
         self._draw_frame()
 
     def _update_per_frame(self):
-        game_objects = self.scene.objects
-        for game_object in game_objects.values():
-            game_object.update()
-        self.logger.info('frame updated.')
+        objects = list(self.scene.objects.values())
+        for game_object in objects:
+            game_object._update()
 
     def _detect_collision(self):
         objects = list(self.scene.objects.values())

@@ -19,10 +19,10 @@ class GameObjectFactory(metaclass=Singleton):
                filepath=None) -> GameObject:
         game_object = GameObject(
             position, dimension, obstacle=obstacle, controllable=controllable, filepath=filepath)
-        self.use(game_object, channel, scene)
+        self.put(game_object, channel, scene)
         return game_object
 
-    def use(self, game_object: GameObject, channel=False, scene=False):
+    def put(self, game_object: GameObject, channel=False, scene=False):
         if scene:
             game_object.attach(self.scene)
 

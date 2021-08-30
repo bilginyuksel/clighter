@@ -1,3 +1,5 @@
 ## Clighter
 
-## ADD ANIMATION
+Configure layer z-index.
+
+Configure character side.
