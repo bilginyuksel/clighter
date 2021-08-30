@@ -26,8 +26,14 @@ class GameObject:
                     for j in range(len(lines[i])):
                         self.drawing[i][j] = lines[i][j]
 
+        self._delay_frames_to_destroy = None
+
     def _update(self):
         # Internal update method, to handle general game object concerns
+        if self._delay_frames_to_destroy is not None:
+            self._delay_frames_to_destroy -= 1
+            if self._delay_frames_to_destroy <= 0:
+                self.destroy()
         self.update()
         if isinstance(self, AnimationMixin):
             self.anim_update()
@@ -38,8 +44,11 @@ class GameObject:
     def collide(self, game_object):
         pass
 
-    def destroy(self):
-        self._scene.remove(self)
+    def destroy(self, delay_frames: int = None):
+        if delay_frames is not None:
+            self._delay_frames_to_destroy = delay_frames
+        else:
+            self._scene.remove(self)
 
     def on_key_pressed(self, key: chr):
         raise NotImplementedError()

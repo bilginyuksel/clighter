@@ -55,18 +55,11 @@ class Monster(GameObject, AnimationMixin):
             'assets/explosion_1.txt', 10))
         self.add_animation('destroy', AnimationFrame(
             'assets/explosion_2.txt', 10))
-        self.wait_destroy = None
-
-    def update(self):
-        if self.wait_destroy is not None:
-            self.wait_destroy -= 1
-            if self.wait_destroy <= 0:
-                self.destroy()
 
     def collide(self, game_object):
         if isinstance(game_object, Bullet):
             self.animate('destroy')
-            self.wait_destroy = 20
+            self.destroy(delay_frames=20)
             game_object.destroy()
 
 
