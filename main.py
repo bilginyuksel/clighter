@@ -16,13 +16,17 @@ class Character(GameObject):
 
     def on_key_pressed(self, key: chr):
         if key == 's':
-            self.position.y += 3
+            # self.position.y += 3
+            self.update_pos(y=5)
         elif key == 'w':
-            self.position.y -= 3
+            # self.position.y -= 3
+            self.update_pos(y=-5)
         elif key == 'd':
-            self.position.x += 3
+            # self.position.x += 3
+            self.update_pos(x=5)
         elif key == 'a':
-            self.position.x -= 3
+            # self.position.x -= 3
+            self.update_pos(x=-5)
         elif key == 'm':
             bullet = Bullet(Position(self.position.x+13,
                                      self.position.y+3), 'right')
