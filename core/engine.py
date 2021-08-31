@@ -45,6 +45,8 @@ class Engine(Thread):
     def _detect_collision(self, objects):
         for i in range(len(objects)):
             o1 = objects[i]
+            if o1.z_index < 0:
+                continue
             for j in range(i+1, len(objects)):
                 o2 = objects[j]
                 if o1.z_index == o2.z_index and o1.rect().intersect(o2.rect()):
