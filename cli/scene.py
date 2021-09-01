@@ -23,11 +23,12 @@ class CLIScene(Scene):
 
     def _draw_objects(self):
         items_to_delete = []
-        for k, v in self.objects.items():
+        copy_objects = list(self.objects.values())
+        for v in copy_objects:
             x, y = v.position.x, v.position.y
             w, h = v.dimension.width, v.dimension.height
             if not v.controllable and (x >= self.columns or y >= self.rows or x+w < 0 or y+h < 0):
-                items_to_delete.append(k)
+                items_to_delete.append(v.get_id())
                 continue
             self._draw_object(v)
 
