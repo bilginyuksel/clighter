@@ -35,7 +35,7 @@ class Character(GameObject):
 class Bullet(GameObject):
     def __init__(self, position: Position, direction: str) -> None:
         super().__init__(position, dimension=None, filepath='assets/bullet.txt',
-                         obstacle=False, controllable=False)
+                         obstacle=False, controllable=False, trigger_collision=False)
         self.direction = direction
 
     def update(self):
