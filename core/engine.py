@@ -45,7 +45,7 @@ class Engine(Thread):
     def _detect_collision(self, objects):
         for i in range(len(objects)):
             o1 = objects[i]
-            if o1.z_index < 0:
+            if o1.z_index < 0 or not o1.trigger_collision:
                 continue
             for j in range(i+1, len(objects)):
                 o2 = objects[j]
