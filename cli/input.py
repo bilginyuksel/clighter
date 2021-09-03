@@ -15,19 +15,23 @@ class CLIInputChannel(Thread, InputChannel):
         self.open()
 
     def open(self):
-        current_input = None
-        while current_input != self._game_over_input:
+        self.current_input = None
+        while self.current_input != self._game_over_input:
             try:
-                current_input = inp.getch()
-                if current_input in self._callbacks:
-                    self._callbacks[current_input]()
+                self.current_input = inp.getch()
+                if self.current_input in self._callbacks:
+                    self._callbacks[self.current_input]()
                 else:
-                    self.notify_all(current_input)
+                    self.notify_all(self.current_input)
             except:
                 # ascii decode error may happen
                 # no need to handle this case
                 # but the program should not crash.
                 pass
+
+    def stop(self):
+        # Stop the infinite loop by setting current input to game over input
+        self.current_input = self._game_over_input
 
     def subscribe(self, game_object):
         self._subscribers[game_object.get_id()] = game_object

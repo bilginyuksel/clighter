@@ -20,6 +20,7 @@ class CLIGame(Game):
 
     def exit(self):
         self.engine.stop()
+        self.channel.stop()
 
     def _create_channel_callbacks(self):
         return {
