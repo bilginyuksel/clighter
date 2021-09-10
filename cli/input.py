@@ -1,6 +1,6 @@
 from threading import Thread
 from core.input import InputChannel
-import msvcrt
+import cli.util.input as inp
 
 
 class CLIInputChannel(Thread, InputChannel):
@@ -18,7 +18,7 @@ class CLIInputChannel(Thread, InputChannel):
         current_input = None
         while current_input != self._game_over_input:
             try:
-                current_input = msvcrt.getch().decode('ascii')
+                current_input = inp.getch()
                 if current_input in self._callbacks:
                     self._callbacks[current_input]()
                 else:
