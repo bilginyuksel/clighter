@@ -1,4 +1,4 @@
-from cli.util.windows import clear_cli, fast_print
+from cli.util.output import clear_cli, fast_print
 from core.dimension import Dimension
 from core.object import GameObject
 from core.scene import Scene
