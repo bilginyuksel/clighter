@@ -16,8 +16,3 @@ class InputChannel(metaclass=Singleton):
 
     def notify_all(self):
         raise NotImplementedError()
-
-    def get_input(self):
-        current_input = self.__input
-        self.__input = None
-        return current_input

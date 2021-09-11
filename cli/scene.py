@@ -1,7 +1,8 @@
-from cli.util.output import clear_cli, fast_print
 from core.dimension import Dimension
 from core.object import GameObject
 from core.scene import Scene
+
+import cli.util.stdout as stdout
 
 
 class CLIScene(Scene):
@@ -13,8 +14,8 @@ class CLIScene(Scene):
                     for _ in range(self.rows)]
 
     def draw(self):
-        clear_cli()
-        fast_print(self._draw())
+        stdout.clear_cli()
+        stdout.fast_print(self._draw())
 
     def _clean(self):
         for i in range(self.rows):
