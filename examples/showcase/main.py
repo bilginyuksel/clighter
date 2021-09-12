@@ -1,12 +1,15 @@
-from core.util.collections import CircularLinkedList
-from core.animation import AnimationFrame, AnimationMixin
-from core.object import GameObject
-from core.position import Position
-from core.factory import GameObjectFactory
-from cli.game import CLIGame
+import sys
+# It is very important to put sys.path.append line of code before
+# importing the clighter library.
+# Because to let this file use clighter, it needs to check the module
+# at 2 depth upper. 
+sys.path.append('../..')
 
 import time
 import random
+
+
+from clighter import *
 
 
 class Character(GameObject):

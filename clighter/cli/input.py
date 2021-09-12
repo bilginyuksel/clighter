@@ -1,7 +1,7 @@
 from threading import Thread
-from core.input import InputChannel
 
-import cli.util.stdin as stdin
+from .util import stdin
+from ..core import InputChannel
 
 
 class CLIInputChannel(Thread, InputChannel):

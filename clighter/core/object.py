@@ -1,9 +1,9 @@
-from core.util.files import read_from_file
-from core.animation import AnimationMixin
-from core.common import generate_id
-from core.dimension import Dimension
-from core.position import Position
-from core.rect import Rectangle
+from .util.files import read_from_file
+from .animation import AnimationMixin
+from .common import generate_id
+from .dimension import Dimension
+from .position import Position
+from .rect import Rectangle
 
 
 class GameObject:
@@ -46,6 +46,8 @@ class GameObject:
             self.z_index = z_index
         else:
             self._scene.remove(self)
+            if self.controllable:
+                self._channel.remove(self)
 
     def on_key_pressed(self, key: chr):
         raise NotImplementedError()
@@ -55,6 +57,7 @@ class GameObject:
         scene.add(self)
 
     def subscribe(self, channel):
+        self._channel = channel
         channel.subscribe(self)
 
     def rect(self) -> Rectangle:

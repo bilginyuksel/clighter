@@ -1,9 +1,8 @@
-from core.object import GameObject
-from core.animation import AnimationMixin
 import time
 
-from core.scene import Scene
 from threading import Thread
+
+from .scene import Scene
 
 PAUSE = 'PAUSE'
 PLAY = 'PLAY'

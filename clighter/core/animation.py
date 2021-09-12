@@ -1,6 +1,5 @@
 from collections import defaultdict
-from core.util.files import read_from_file
-from core.util.collections import CircularLinkedList
+from .util import CircularLinkedList, read_from_file
 
 
 class AnimationFrame:

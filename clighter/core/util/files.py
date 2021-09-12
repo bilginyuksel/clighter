@@ -1,5 +1,5 @@
 from typing import List, Tuple
-from core.dimension import Dimension
+from .. import Dimension
 
 
 def read_from_file(filepath: str) -> Tuple[List, Dimension]:

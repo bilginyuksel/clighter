@@ -1,9 +1,7 @@
-from core.dimension import Dimension
-from core.game import Game
-from core.engine import Engine
+from ..core import Dimension, Game, Engine 
 
-from cli.scene import CLIScene
-from cli.input import CLIInputChannel
+from .scene import CLIScene
+from .input import CLIInputChannel
 
 
 class CLIGame(Game):

@@ -1,7 +1,7 @@
-from core.input import InputChannel
-from core.factory import GameObjectFactory
-from core.scene import Scene
-from core.engine import Engine
+from .input import InputChannel
+from .factory import GameObjectFactory
+from .scene import Scene
+from .engine import Engine
 
 
 class Game:

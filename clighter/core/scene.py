@@ -1,5 +1,5 @@
-from core.dimension import Dimension
-from core.object import GameObject
+from .dimension import Dimension
+from .object import GameObject
 
 
 class Scene:

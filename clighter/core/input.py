@@ -1,5 +1,5 @@
-from core.util.singleton import Singleton
-from core.object import GameObject
+from .util import Singleton
+from .object import GameObject
 
 
 class InputChannel(metaclass=Singleton):
@@ -16,3 +16,7 @@ class InputChannel(metaclass=Singleton):
 
     def notify_all(self):
         raise NotImplementedError()
+    
+    def remove(self, obj: GameObject):
+        if obj.get_id() in self._subscribers:
+            del self._subscribers[obj.get_id()]

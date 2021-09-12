@@ -1,5 +1,5 @@
-from core.dimension import Dimension
-from core.position import Position
+from .dimension import Dimension
+from .position import Position
 
 
 class Rectangle:

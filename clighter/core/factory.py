@@ -1,7 +1,7 @@
-from core.util.singleton import Singleton
-from core.position import Position
-from core.dimension import Dimension
-from core.object import GameObject
+from .util import Singleton
+from .position import Position
+from .dimension import Dimension
+from .object import GameObject
 
 
 class GameObjectFactory(metaclass=Singleton):
