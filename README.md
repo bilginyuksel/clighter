@@ -8,7 +8,7 @@ When you use __clighter__ you don't have to think about how to render objects wi
 
 ### 1. Installation
 
-Currently the package not yet installed, but you can use the comands below to use the package. Whenever the package installed you can use `pip` to install __clighter__.
+Currently the package not yet installed, but you can use the comands below to use the package. Whenever the package is installed you can use `pip` to install __clighter__.
 
 ```bash
 $ git clone https://github.com/bilginyuksel/clighter
@@ -36,7 +36,7 @@ from clighter import * # to use all classes and functions without clighter prefi
 
 Render a character to the scene and subscribe character to input channel. Whenever user enters `w,a,s,d` the character will move to the given direction.
 
-Also we need a character you can copy the `character.txt` file from `clighter/examples/main/assets/character.txt` or you can create a brand new character for yourself. Be sure to give correct filepath.
+Also we need a character, you can copy the `character.txt` file from `clighter/examples/main/assets/character.txt` or you can create a brand new character for yourself. Be sure to give correct filepath.
 
 ```python
 from clighter import CLIGame, GameObject, Position
@@ -101,4 +101,8 @@ class Bullet(GameObject):
         # When you set `trigger_collision` parameter to False the engine will skip collision effect for bullet. But that does not mean you will miss this collision effect. If this bullet collides with a character you can catch the collision effect with the character's collide function.
         GameObject.__init__(self, position, dimension=None, filepath=None,
                             obstacle=False, controllable=False, trigger_collision=False)
+
+    # if `trigger_collision` parameter is False then the function below will not be triggered even if there is a collision but if this bullet object collides with another object and if the collided objects `trigger_colision` parameter is True then the collision effect can be captured with collided object's collide function.
+    def collide(self, obj: GameObject):
+        pass
 ```
