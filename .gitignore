@@ -1,1 +1,4 @@
 **/__pycache__
+dist
+**/clighter.egg-info
+.dev
