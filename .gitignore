@@ -2,3 +2,4 @@
 dist
 **/clighter.egg-info
 .dev
+.prod

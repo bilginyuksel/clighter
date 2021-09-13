@@ -8,7 +8,14 @@ When you use __clighter__ you don't have to think about how to render objects wi
 
 ### 1. Installation
 
-Currently the package not yet installed, but you can use the comands below to use the package. Whenever the package is installed you can use `pip` to install __clighter__.
+- Install with pip 
+
+
+```bash
+$ pip install clighter
+```
+
+- Clone the library use without installation
 
 ```bash
 $ git clone https://github.com/bilginyuksel/clighter
