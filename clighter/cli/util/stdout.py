@@ -8,13 +8,19 @@ __is_win = (__running_os == 'windows')
 if __is_unix:
     import curses
 
-    terminal = curses.initscr()
 elif __is_win:
     import ctypes
 
     g_handle = ctypes.windll.kernel32.GetStdHandle(ctypes.c_long(-11))
 else:
     raise NotImplementedError
+
+__unix_terminal = None
+
+
+def __create_terminal():
+    __unix_terminal = curses.initscr()
+    return __unix_terminal
 
 
 def fast_print(content):
@@ -49,10 +55,12 @@ def clear_cli():
 
 
 def __unix_fast_print(content):
+    terminal = __unix_terminal or __create_terminal()
     terminal.addstr(0, 0, content)
 
 
 def __unix_clear_cli():
+    terminal = __unix_terminal or __create_terminal()
     terminal.clear()
 
 

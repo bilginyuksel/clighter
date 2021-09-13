@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="clighter",
-    version="0.0.1",
+    version="0.3.2",
     author="bilginyuksel",
     author_email="bilgin.yuksel96@gmail.com",
     description="Game engine for CLI games.",
@@ -20,7 +20,7 @@ setuptools.setup(
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
     ],
-    package_dir={"": "clighter"},
-    packages=setuptools.find_packages(where="clighter"),
+    package_dir={"": "."},
+    packages=setuptools.find_packages(),
     python_requires=">=3.6",
 )

@@ -2,7 +2,7 @@ import platform
 
 __running_os = platform.system().lower()
 
-# Also the platform could be java, 
+# Also the platform could be java,
 # Application libraries didn't test for java,
 # so we will throw `NotImplementedError` if running_os is java
 __is_unix = (__running_os == 'linux' or __running_os == 'darwin')
@@ -11,25 +11,34 @@ __is_win = (__running_os == 'windows')
 if __is_unix:
     import curses
 
-    curses.noecho()
-    terminal = curses.initscr()
-    terminal.nodelay(True)
 elif __is_win:
     import msvcrt
-    
+
 else:
     raise NotImplementedError
 
+__unix_terminal = None
+
+
+def __create_terminal():
+    curses.noecho()
+    __unix_terminal = curses.initscr()
+    __unix_terminal.nodelay(True)
+    return __unix_terminal
+
 
 def __unix_read() -> chr:
+    # We should not initialize curses unless it is called
+    unix_terminal = __unix_terminal or __create_terminal()
     try:
-        return terminal.getkey()
+        return unix_terminal.getkey()
     except:
         # When there is no input to read it will throw an error
         # No need to do anything in this except block
         # We put this except block to avoid application crash
         # Return None if there is an error
         return None
+
 
 def __win_read() -> chr:
     try:
@@ -40,11 +49,13 @@ def __win_read() -> chr:
         # to avoid application crash catch the error and return None
         return None
 
+
 __supported_os_read_callbacks = {
     'linux': __unix_read,
     'darwin': __unix_read,
     'windows': __win_read
 }
+
 
 def read():
     """
@@ -56,4 +67,3 @@ def read():
         raise NotImplementedError
 
     return __supported_os_read_callbacks[__running_os]()
-
