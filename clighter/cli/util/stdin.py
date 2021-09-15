@@ -30,24 +30,11 @@ def __create_terminal():
 def __unix_read() -> chr:
     # We should not initialize curses unless it is called
     unix_terminal = __unix_terminal or __create_terminal()
-    try:
-        return unix_terminal.getkey()
-    except:
-        # When there is no input to read it will throw an error
-        # No need to do anything in this except block
-        # We put this except block to avoid application crash
-        # Return None if there is an error
-        return None
+    return unix_terminal.getkey()
 
 
 def __win_read() -> chr:
-    try:
-        return msvcrt.getch().decode('ascii')
-    except:
-        # When getch captures a character which cannot decode to ascii
-        # it will throw an error, no need to handle this error
-        # to avoid application crash catch the error and return None
-        return None
+    return msvcrt.getch().decode('ascii')
 
 
 __supported_os_read_callbacks = {
@@ -66,4 +53,15 @@ def read():
     if __running_os not in __supported_os_read_callbacks:
         raise NotImplementedError
 
-    return __supported_os_read_callbacks[__running_os]()
+    try:
+        return __supported_os_read_callbacks[__running_os]()
+    except:
+        """
+        Windows: 
+            When getch captures a character which cannot be decoded to ascii
+            it will throw an error, catch the error to avoid app crash
+        Linux/Darwin:
+            When there is no input to read it will throw an error
+            catch the error to avoid app crash
+        """
+        return None
