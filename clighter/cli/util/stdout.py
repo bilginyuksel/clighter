@@ -31,12 +31,15 @@ def fast_print(content):
 
     NOTE: Starts from 0,0 index at terminal. And draws via overriding other characters.
     """
-    if __is_win:
-        __win_fast_print(content)
-    elif __is_unix:
-        __unix_fast_print(content)
-    else:
-        raise NotImplementedError
+    try:
+        if __is_win:
+            __win_fast_print(content)
+        elif __is_unix:
+            __unix_fast_print(content)
+        else:
+            raise NotImplementedError
+    except:
+        print('Fast print works unexpectedly! Check the terminal size and width for better experince')
 
 
 def clear_cli():
