@@ -16,7 +16,7 @@ class InputChannel(metaclass=Singleton):
 
     def notify_all(self):
         raise NotImplementedError()
-    
+
     def remove(self, obj: GameObject):
         if obj.get_id() in self._subscribers:
             del self._subscribers[obj.get_id()]

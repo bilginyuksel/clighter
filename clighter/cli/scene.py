@@ -1,6 +1,6 @@
 from ..core import Dimension, GameObject, Scene
 
-from .util import stdout 
+from .util import stdout
 
 
 class CLIScene(Scene):

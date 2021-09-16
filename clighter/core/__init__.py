@@ -8,3 +8,7 @@ from .scene import Scene
 from .engine import Engine
 from .game import Game
 from .input import InputChannel
+
+__all__ = ['Position', 'Dimension', 'AnimationFrame',
+           'AnimationMixin', 'GameObjectFactory', 'GameObject',
+           'Rectangle', 'Scene', 'Engine', 'Game', 'InputChannel']

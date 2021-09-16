@@ -1,4 +1,4 @@
-from ..core import Dimension, Game, Engine 
+from ..core import Dimension, Game, Engine
 
 from .scene import CLIScene
 from .input import CLIInputChannel
