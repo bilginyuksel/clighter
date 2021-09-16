@@ -22,6 +22,7 @@ jobs:
 
   lint:
     runs-on: ubuntu-latest
+    needs: [build]
     steps:
       - uses: actions/checkout@v2
       - name: Set up python
@@ -39,6 +40,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    needs: [lint]
     steps:
       - uses: actions/checkout@v2
       - name: Set up python
@@ -54,6 +56,7 @@ jobs:
 
   deploy-staging:
     runs-on: ubuntu-latest
+    needs: [test]
     steps:
       - uses: actions/checkout@v2
       - name: Set up python
@@ -64,6 +67,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install build
+          pip install twine
       - name: Clean directory and prepare setup file
         run: |
           rm -rf dist/ clighter.egg-info
@@ -76,6 +80,7 @@ jobs:
 
   deploy-prod:
     runs-on: ubuntu-latest
+    needs: [deploy-staging]
     steps:
       - uses: actions/checkout@v2
       - name: Set up python
@@ -86,6 +91,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install build
+          pip install twine
       - name: Clean directory
         run: |
           rm -rf dist/ clighter.egg-info

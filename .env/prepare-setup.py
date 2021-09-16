@@ -24,7 +24,7 @@ def write_setupcfg():
     if z % 10 == 0:
         z = 0
         y += 1
-    if y % 10 == 0:
+    if y != 0 and y % 10 == 0:
         y = 0
         x += 1
 
