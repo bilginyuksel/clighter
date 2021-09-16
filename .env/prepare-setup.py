@@ -1,6 +1,6 @@
 
 def read_setupcfg():
-    with open('../setup.cfg', 'r') as f:
+    with open('setup.cfg', 'r') as f:
         return f.read()
 
 
@@ -34,7 +34,7 @@ def write_setupcfg():
     new_content = old_content.replace(
         old_version_definition, new_version_definition)
 
-    with open('../setup.cfg', 'w') as f:
+    with open('setup.cfg', 'w') as f:
         f.write(new_content)
 
 
