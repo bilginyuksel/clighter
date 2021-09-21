@@ -30,10 +30,3 @@ class CLIInputChannel(Thread, InputChannel):
     def stop(self):
         # Stop the infinite loop by setting current input to game over input
         self.current_input = self._game_over_input
-
-    def subscribe(self, game_object):
-        self._subscribers[game_object.get_id()] = game_object
-
-    def notify_all(self, key: chr):
-        for subscriber in self._subscribers.values():
-            subscriber.on_key_pressed(key)

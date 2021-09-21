@@ -4,9 +4,8 @@ from .. import Dimension
 
 def read_from_file(filepath: str) -> Tuple[List, Dimension]:
     """
-        Read game object from given file 
-
-        `returns (List[List[str]], Dimension)`
+    Read the game object from given file and return the `drawing` and 
+    the `dimension` of the object.
     """
 
     with open(filepath, 'r') as f:

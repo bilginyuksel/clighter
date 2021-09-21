@@ -12,6 +12,9 @@ class CircularLinkedList:
         self.length = 0
 
     def append(self, value):
+        """
+        Add new item at the end of the circular linked list.
+        """
         if self.head is None:
             self.head = LinkedListNode(value)
             self.tail = self.head
@@ -24,6 +27,9 @@ class CircularLinkedList:
         self.length += 1
 
     def next(self) -> LinkedListNode:
+        """
+        Get the next node of the circular linked list.
+        """
         if self.head is None:
             raise IndexError()
 

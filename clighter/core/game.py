@@ -17,7 +17,13 @@ class Game:
         factory.engine = engine
 
     def start(self):
+        """
+        Start the engine, channel and scene. 
+        """
         raise NotImplementedError()
 
     def exit(self):
+        """
+        Exit the game. 
+        """
         raise NotImplementedError()

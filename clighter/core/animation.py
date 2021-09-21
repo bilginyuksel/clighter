@@ -28,10 +28,19 @@ class AnimationMixin:
         self.dimension = self._curr_node.value.dimension
 
     def add_animation(self, group: str, animation: AnimationFrame):
+        """
+        Add animations for specific groups.
+        Animation groups can be executed consecutively. So use this function
+        to define consecutive animations for a specific action. 
+        """
         animation_group = self._animation_groups[group]
         animation_group.append(animation)
 
     def animate(self, group):
+        """
+        Use this function to start an animation group action.
+        It will find the given `group` animations and execute consecutively.
+        """
         if not group in self._animation_groups:
             # There is no animation groups to apply
             return None
