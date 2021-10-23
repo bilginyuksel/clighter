@@ -2,13 +2,17 @@
 
 __Clighter__ is a game engine for terminal games. You can use this library to build none flickering, totaly fluid games. You have very easy to use APIs in your hand with __clighter__.
 
-When you use __clighter__ you don't have to think about how to render objects with multiple characters, you also don't need to think about the collision between objects and many other features that __clighter__ provides you. 
+When you use __clighter__ you don't have to think about how to render objects with multiple characters, you also don't need to think about the collision between objects and many other features that __clighter__ provides you.
+
+## Simple spaceshooter game
+
+![spaceshooter](.docs/spaceshooter.gif)
 
 ## Quick Start
 
 ### 1. Installation
 
-- Install with pip 
+- Install with pip
 
 
 ```bash
@@ -24,7 +28,7 @@ $ mkdir <your-folder>
 $ cd <your-folder>
 ```
 
-After you execute the commands above you can create your own structure for your game. 
+After you execute the commands above you can create your own structure for your game.
 
 > NOTE: Do not forget to import sys and append to the directory where clighter exist. Follow the example code block to use the clighter package effectively for your project under `examples` directory.
 
@@ -35,7 +39,7 @@ sys.path.append('../..')
 
 # Then you can import the clighter
 import clighter
-# or 
+# or
 from clighter import * # to use all classes and functions without clighter prefix
 ```
 
@@ -76,9 +80,9 @@ if __name__ == '__main__':
 
 ### Rendering
 
-__Clighter__ will automatically handle object rendering. You just need to provide a `.txt` file to the game object. After you give the filepath to the object it will automatically render it without a problem. 
+__Clighter__ will automatically handle object rendering. You just need to provide a `.txt` file to the game object. After you give the filepath to the object it will automatically render it without a problem.
 
-Also you can move the character without having any rendering problems at all. Just change the position of the object and it will move. 
+Also you can move the character without having any rendering problems at all. Just change the position of the object and it will move.
 
 ```python
 class SomeObject(GameObject):
@@ -88,7 +92,7 @@ class SomeObject(GameObject):
     def update(self):
         # the object will move at x_axis by 1 unit in every frame.
         self.position.x += 1
-    
+
     ...
     ...
 
@@ -97,7 +101,7 @@ class SomeObject(GameObject):
 
 ### Collision
 
-Collision is a very important and good feature when you create games. With __clighter__ you can create layered rendering hierarcy between the objects with the `z_index`. When you put some objects in the same `z_index` whenever they collide with each other the engine will automatically trigger their `collide` functions. 
+Collision is a very important and good feature when you create games. With __clighter__ you can create layered rendering hierarcy between the objects with the `z_index`. When you put some objects in the same `z_index` whenever they collide with each other the engine will automatically trigger their `collide` functions.
 
 > NOTE: If there are a lot objects in the scene then calculating collision for every object will be a lot of work but good news: you can simply optimize it via using a single parameter. For instance if there are a lot of bullets in the map then the system will control the collision effect between bullets and character both at the same time. But you can deactivate the bullet collision search and the game will be much more faster.
 
